@@ -202,6 +202,23 @@
   @media(max-width:820px){.gal.g3{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:560px){.gal.g3,.gal.g2{grid-template-columns:1fr}}
 
+  /* mosaico de fotos (trabalhos) */
+  .masonry{columns:3 260px;column-gap:18px}
+  .masonry .shot{
+    break-inside:avoid;margin-bottom:18px;border-radius:var(--r-sm);overflow:hidden;
+    position:relative;box-shadow:var(--shadow-sm);border:1px solid var(--line);background:var(--surface);
+    transform:translateZ(0);transition:transform .25s,box-shadow .25s
+  }
+  .masonry .shot:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+  .masonry .shot img{width:100%;display:block}
+  .masonry .shot figcaption{
+    position:absolute;left:0;right:0;bottom:0;padding:26px 16px 14px;color:#fff;
+    background:linear-gradient(to top,rgba(38,20,30,.86),rgba(38,20,30,.25) 70%,transparent);
+    font-size:.86rem;font-weight:600;line-height:1.35
+  }
+  .masonry .shot figcaption b{display:block;font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#F6C6DC;margin-bottom:3px}
+  @media(max-width:520px){.masonry{columns:1}}
+
   /* certificado em PDF (card clicável) */
   .cert-card{display:flex;flex-direction:column}
   .cert-card .media{aspect-ratio:16/10;display:grid;place-items:center}
@@ -377,31 +394,31 @@
       <!-- Cada card abre o PDF do certificado ao clicar. Edite o <h4> com o nome real do curso. -->
       <a class="card cert-card reveal" href="certificados/cert-1.pdf" target="_blank" rel="noopener">
         <div class="media"><div class="pdfmark"><span class="doc">PDF</span><small>certificado</small></div></div>
-        <div class="body"><span class="tag">Capacitação</span><h4>Certificado de participação</h4><p><span class="open">Abrir PDF →</span></p></div>
+        <div class="body"><span class="tag">Capacitação</span><h4>Certificado 01</h4><p><span class="open">Abrir PDF →</span></p></div>
       </a>
       <a class="card cert-card reveal" href="certificados/cert-2.pdf" target="_blank" rel="noopener">
         <div class="media"><div class="pdfmark"><span class="doc">PDF</span><small>certificado</small></div></div>
-        <div class="body"><span class="tag">Capacitação</span><h4>Atividade complementar</h4><p><span class="open">Abrir PDF →</span></p></div>
+        <div class="body"><span class="tag">Capacitação</span><h4>Certificado 02</h4><p><span class="open">Abrir PDF →</span></p></div>
       </a>
       <a class="card cert-card reveal" href="certificados/cert-3.pdf" target="_blank" rel="noopener">
         <div class="media"><div class="pdfmark"><span class="doc">PDF</span><small>certificado</small></div></div>
-        <div class="body"><span class="tag">Capacitação</span><h4>Atividade complementar</h4><p><span class="open">Abrir PDF →</span></p></div>
+        <div class="body"><span class="tag">Capacitação</span><h4>Certificado 03</h4><p><span class="open">Abrir PDF →</span></p></div>
       </a>
       <a class="card cert-card reveal" href="certificados/cert-4.pdf" target="_blank" rel="noopener">
         <div class="media"><div class="pdfmark"><span class="doc">PDF</span><small>certificado</small></div></div>
-        <div class="body"><span class="tag">Capacitação</span><h4>Atividade complementar</h4><p><span class="open">Abrir PDF →</span></p></div>
+        <div class="body"><span class="tag">Capacitação</span><h4>Certificado 04</h4><p><span class="open">Abrir PDF →</span></p></div>
       </a>
       <a class="card cert-card reveal" href="certificados/cert-5.pdf" target="_blank" rel="noopener">
         <div class="media"><div class="pdfmark"><span class="doc">PDF</span><small>certificado</small></div></div>
-        <div class="body"><span class="tag">Capacitação</span><h4>Atividade complementar</h4><p><span class="open">Abrir PDF →</span></p></div>
+        <div class="body"><span class="tag">Capacitação</span><h4>Certificado 05</h4><p><span class="open">Abrir PDF →</span></p></div>
       </a>
       <a class="card cert-card reveal" href="certificados/cert-6.pdf" target="_blank" rel="noopener">
         <div class="media"><div class="pdfmark"><span class="doc">PDF</span><small>certificado</small></div></div>
-        <div class="body"><span class="tag">Capacitação</span><h4>Certificado</h4><p><span class="open">Abrir PDF →</span></p></div>
+        <div class="body"><span class="tag">Capacitação</span><h4>Certificado 06</h4><p><span class="open">Abrir PDF →</span></p></div>
       </a>
       <a class="card cert-card reveal" href="certificados/cert-7.pdf" target="_blank" rel="noopener">
         <div class="media"><div class="pdfmark"><span class="doc">PDF</span><small>certificado</small></div></div>
-        <div class="body"><span class="tag">Capacitação</span><h4>Certificado</h4><p><span class="open">Abrir PDF →</span></p></div>
+        <div class="body"><span class="tag">Capacitação</span><h4>Certificado 07</h4><p><span class="open">Abrir PDF →</span></p></div>
       </a>
     </div>
   </div>
@@ -416,27 +433,19 @@
       <p class="lead">Momentos de partilha de conhecimento — em sala, em eventos e junto à
         comunidade, onde a teoria encontra o cuidado com as pessoas.</p>
     </div>
-    <div class="gal g2">
-      <figure class="card reveal">
-        <div class="media"><img src="fotos/tcc-1.jpg" alt="Apresentação de trabalho" onerror="this.style.display='none'">
-          <div class="ph"><span class="mono">✦</span><small>apresentação</small></div></div>
-        <figcaption class="body"><span class="tag">Apresentação</span><h4>Apresentação de trabalho / TCM</h4><p>Tema, evento e data.</p></figcaption>
-      </figure>
-      <figure class="card reveal">
-        <div class="media"><img src="fotos/tcc-2.jpg" alt="Apresentação de trabalho" onerror="this.style.display='none'">
-          <div class="ph"><span class="mono">✦</span><small>apresentação</small></div></div>
-        <figcaption class="body"><span class="tag">Apresentação</span><h4>Apresentação de trabalho / TCM</h4><p>Tema, evento e data.</p></figcaption>
-      </figure>
-      <figure class="card reveal">
-        <div class="media"><img src="fotos/comunidade-1.jpg" alt="Trabalho na comunidade" onerror="this.style.display='none'">
-          <div class="ph"><span class="mono">✦</span><small>comunidade</small></div></div>
-        <figcaption class="body"><span class="tag">Comunidade</span><h4>Ação na comunidade</h4><p>Local, público atendido e impacto.</p></figcaption>
-      </figure>
-      <figure class="card reveal">
-        <div class="media"><img src="fotos/comunidade-2.jpg" alt="Trabalho na comunidade" onerror="this.style.display='none'">
-          <div class="ph"><span class="mono">✦</span><small>comunidade</small></div></div>
-        <figcaption class="body"><span class="tag">Comunidade</span><h4>Ação na comunidade</h4><p>Local, público atendido e impacto.</p></figcaption>
-      </figure>
+    <div class="masonry reveal">
+      <figure class="shot"><img src="fotos/trab-01.jpg" alt="Campanha Meu Futuro Sem Fumaça" loading="lazy"><figcaption><b>Comunidade</b>Campanha “Meu Futuro Sem Fumaça”</figcaption></figure>
+      <figure class="shot"><img src="fotos/trab-02.jpg" alt="Treinamento de RCP" loading="lazy"><figcaption><b>Prática técnica</b>Treinamento de RCP (reanimação cardiopulmonar)</figcaption></figure>
+      <figure class="shot"><img src="fotos/trab-03.jpg" alt="Apresentação em sala" loading="lazy"><figcaption><b>Apresentação</b>Seminário — Identidade Nacional</figcaption></figure>
+      <figure class="shot"><img src="fotos/trab-04.jpg" alt="Mapa de abrangência da USF" loading="lazy"><figcaption><b>Trabalho acadêmico</b>Mapa de abrangência da USF Dom Hélder Câmara</figcaption></figure>
+      <figure class="shot"><img src="fotos/trab-05.jpg" alt="Apresentação de pesquisa" loading="lazy"><figcaption><b>Apresentação</b>Pesquisa apresentada com dados e gráficos</figcaption></figure>
+      <figure class="shot"><img src="fotos/trab-06.jpg" alt="Visita ao CISAM UPE" loading="lazy"><figcaption><b>Vivência</b>Visita ao CISAM/UPE — Unidade Ambulatorial</figcaption></figure>
+      <figure class="shot"><img src="fotos/trab-07.jpg" alt="Ação no Centro de Convivência de Idosos" loading="lazy"><figcaption><b>Comunidade</b>Ação no Centro de Convivência de Idosos</figcaption></figure>
+      <figure class="shot"><img src="fotos/trab-08.jpg" alt="Campanha São João Seguro" loading="lazy"><figcaption><b>Comunidade</b>Campanha “São João Seguro”</figcaption></figure>
+      <figure class="shot"><img src="fotos/trab-09.jpg" alt="Apresentação com microfone" loading="lazy"><figcaption><b>Apresentação</b>Devolutiva à comunidade sobre saúde</figcaption></figure>
+      <figure class="shot"><img src="fotos/trab-10.jpg" alt="Hospital Universitário UPE" loading="lazy"><figcaption><b>Vivência</b>Hospital Universitário Oswaldo Cruz (UPE)</figcaption></figure>
+      <figure class="shot"><img src="fotos/trab-11.jpg" alt="Territorialização em saúde" loading="lazy"><figcaption><b>Vivência</b>Territorialização — USF Dom Hélder Câmara</figcaption></figure>
+      <figure class="shot"><img src="fotos/trab-12.jpg" alt="Ação educativa na UPA" loading="lazy"><figcaption><b>Comunidade</b>Ação educativa na UPA Nova Descoberta</figcaption></figure>
     </div>
   </div>
 </section>
