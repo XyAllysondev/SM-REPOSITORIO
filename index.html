@@ -15,6 +15,7 @@
 -->
 <title>Sthefany Mariano · @Enf.focus_ — Enfermagem, estudos & autocuidado</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23F7A8C4'/%3E%3Cstop offset='.5' stop-color='%23D06F97'/%3E%3Cstop offset='1' stop-color='%237FA6D4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23g)'/%3E%3Cpath d='M32 47s-14-8.7-14-18a8 8 0 0 1 14-5.2A8 8 0 0 1 46 29c0 9.3-14 18-14 18z' fill='white'/%3E%3C/svg%3E">
 <style>
   /* ===================== TOKENS ===================== */
   :root{
@@ -257,18 +258,113 @@
   .foot a{color:var(--muted)}.foot a:hover{color:var(--rose-deep)}
 
   /* reveal */
-  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
   .reveal.in{opacity:1;transform:none}
+
+  /* ===================== EVOLUÇÃO VISUAL & ANIMAÇÕES ===================== */
+  /* barra de progresso de rolagem */
+  .progress{position:fixed;top:0;left:0;height:3px;width:0;z-index:70;
+    background:linear-gradient(90deg,var(--rose),var(--blue),var(--green));
+    box-shadow:0 0 12px color-mix(in srgb,var(--rose) 65%,transparent)}
+
+  /* avatar no topo */
+  .brand{gap:.6em}
+  .brand .avatar{width:36px;height:36px;border-radius:50%;object-fit:cover;object-position:center 22%;
+    border:2px solid var(--surface);box-shadow:0 0 0 2px var(--rose),var(--shadow-sm)}
+
+  /* link do menu com sublinhado animado */
+  .nav-links a{position:relative}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:-5px;height:2px;width:0;border-radius:2px;
+    background:linear-gradient(90deg,var(--rose),var(--blue));transition:width .28s ease}
+  .nav-links a:hover::after{width:100%}
+
+  /* nome com gradiente animado */
+  .hero h1 .grad{
+    background:linear-gradient(100deg,var(--rose-deep),var(--blue),var(--green),var(--rose-deep));
+    background-size:280% 100%;-webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;color:transparent;animation:shimmer 9s linear infinite}
+  @keyframes shimmer{to{background-position:280% 0}}
+
+  /* fundo do hero que respira + blobs flutuantes */
+  .decor{position:absolute;inset:0;overflow:hidden;z-index:-1;pointer-events:none}
+  .blob{position:absolute;border-radius:50%;filter:blur(46px);opacity:.55;animation:drift 20s ease-in-out infinite}
+  .blob.b1{width:300px;height:300px;background:var(--rose-soft);top:-50px;left:-70px}
+  .blob.b2{width:260px;height:260px;background:var(--blue-soft);bottom:-70px;right:8%;animation-duration:24s;animation-delay:-4s}
+  .blob.b3{width:220px;height:220px;background:var(--green-soft);top:38%;right:-50px;animation-duration:28s;animation-delay:-8s}
+  @keyframes drift{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(26px,-32px) scale(1.06)}66%{transform:translate(-18px,22px) scale(.96)}}
+
+  /* pétalas / brilhos flutuantes */
+  .petal{position:absolute;opacity:.75;animation:floaty 7s ease-in-out infinite;will-change:transform;user-select:none}
+  @keyframes floaty{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-16px) rotate(12deg)}}
+
+  /* moldura da foto: anel girando + leve flutuar + brilho piscando */
+  .portrait{animation:bob 6.5s ease-in-out infinite}
+  .portrait::before{content:"";position:absolute;inset:-16px;border-radius:50%;
+    border:2px dashed color-mix(in srgb,var(--rose) 55%,transparent);animation:spin 34s linear infinite;z-index:-1}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .portrait .spark{animation:twinkle 3.2s ease-in-out infinite}
+  @keyframes twinkle{0%,100%{opacity:.45;transform:scale(.85) rotate(0)}50%{opacity:1;transform:scale(1.2) rotate(20deg)}}
+
+  /* faixa rolante */
+  .ribbon{background:linear-gradient(90deg,var(--rose),var(--rose-deep));overflow:hidden;padding:15px 0;white-space:nowrap}
+  .ribbon .track{display:inline-block;animation:marq 30s linear infinite}
+  .ribbon .track b{font-family:var(--serif);font-weight:500;font-size:1.06rem;color:#fff;letter-spacing:.03em;padding:0 6px}
+  .ribbon .track i{color:color-mix(in srgb,#fff 72%,var(--rose-soft));font-style:normal;padding:0 22px}
+  @keyframes marq{to{transform:translateX(-50%)}}
+
+  /* números que contam */
+  .stats-wrap{background:
+     radial-gradient(60% 120% at 50% -10%,color-mix(in srgb,var(--rose-soft) 55%,transparent),transparent 70%)}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:30px 20px;
+    text-align:center;box-shadow:var(--shadow-sm);position:relative;overflow:hidden;
+    transition:transform .25s,box-shadow .25s}
+  .stat:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+  .stat::before{content:"";position:absolute;inset:0 0 auto 0;height:4px;
+    background:linear-gradient(90deg,var(--rose),var(--blue),var(--green))}
+  .stat .num{font-family:var(--serif);font-size:2.7rem;font-weight:600;color:var(--rose-deep);line-height:1;font-variant-numeric:tabular-nums}
+  .stat .lbl{font-size:.83rem;color:var(--muted);margin-top:9px;font-weight:600}
+  @media(max-width:760px){.stats{grid-template-columns:repeat(2,1fr)}}
+
+  /* florão divisor */
+  .flourish{display:flex;align-items:center;justify-content:center;gap:14px;color:var(--rose);padding:6px 0;font-size:.9rem}
+  .flourish::before,.flourish::after{content:"";height:1px;width:64px;background:linear-gradient(90deg,transparent,var(--rose))}
+  .flourish::after{background:linear-gradient(90deg,var(--rose),transparent)}
+
+  /* brilho passando no botão */
+  .btn-primary{position:relative;overflow:hidden}
+  .btn-primary::after{content:"";position:absolute;top:0;left:-130%;width:60%;height:100%;
+    background:linear-gradient(120deg,transparent,rgba(255,255,255,.55),transparent);
+    transform:skewX(-20deg);transition:left .6s ease}
+  .btn-primary:hover::after{left:150%}
+
+  /* botão flutuante de WhatsApp */
+  .wa-float{position:fixed;bottom:22px;right:22px;z-index:60;width:58px;height:58px;border-radius:50%;
+    background:#25D366;color:#fff;display:grid;place-items:center;font-size:1.6rem;text-decoration:none;
+    box-shadow:0 12px 28px -8px rgba(37,211,102,.7);animation:pulse 2.6s ease-in-out infinite;transition:transform .2s}
+  .wa-float:hover{transform:scale(1.09)}
+  @keyframes pulse{0%,100%{box-shadow:0 12px 28px -8px rgba(37,211,102,.7)}
+    50%{box-shadow:0 12px 30px -6px rgba(37,211,102,.9),0 0 0 10px rgba(37,211,102,.10)}}
+
+  /* brilho suave ao revelar cards/pilares */
+  .pillar,.stat,.card,.masonry .shot{will-change:transform}
+
   @media(prefers-reduced-motion:reduce){
     .reveal{opacity:1;transform:none;transition:none}
     html{scroll-behavior:auto}
+    .blob,.petal,.portrait,.portrait::before,.spark,.ribbon .track,.wa-float,.hero h1 .grad,.btn-primary::after{animation:none!important}
+    .hero h1 .grad{-webkit-text-fill-color:var(--rose-deep);color:var(--rose-deep)}
   }
 </style>
+
+<!-- barra de progresso de leitura -->
+<div class="progress" id="progress"></div>
 
 <!-- ======================= NAV ======================= -->
 <header class="nav">
   <div class="wrap nav-in">
-    <a class="brand" href="#top"><span class="dot"></span>Enf.focus_</a>
+    <a class="brand" href="#top"><img class="avatar" src="fotos/perfil.jpg" alt="Sthefany" onerror="this.style.display='none'">Enf.focus_</a>
     <nav class="nav-links">
       <a href="#sobre">Sobre</a>
       <a href="#marca">O perfil</a>
@@ -284,10 +380,18 @@
 <a id="top"></a>
 <section class="hero">
   <div class="hero-bg"></div>
+  <div class="decor" aria-hidden="true">
+    <span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span>
+    <span class="petal" style="top:16%;left:6%;font-size:1.2rem;animation-delay:-1s;color:var(--rose)">✦</span>
+    <span class="petal" style="top:70%;left:12%;font-size:1rem;animation-delay:-3s;color:var(--blue)">♡</span>
+    <span class="petal" style="top:30%;right:8%;font-size:1.1rem;animation-delay:-2s;color:var(--green)">✿</span>
+    <span class="petal" style="top:82%;right:16%;font-size:.9rem;animation-delay:-4s;color:var(--rose)">✦</span>
+    <span class="petal" style="top:8%;right:26%;font-size:.85rem;animation-delay:-5s;color:var(--rose-deep)">♡</span>
+  </div>
   <div class="wrap hero-grid">
     <div class="reveal">
       <span class="eyebrow">Enfermagem · Estudos · Autocuidado</span>
-      <h1>Sthefany Mariano <em>&amp; </em>o cuidado que inspira</h1>
+      <h1><span class="grad">Sthefany Mariano</span><br>&amp; o <em>cuidado</em> que inspira</h1>
       <p class="role"><b>Enfermeira em formação</b> pela UPE · Criadora do <b>@Enf.focus_</b></p>
       <p class="lead">Um diário de bordo acadêmico que une conteúdo técnico de qualidade,
         organização e humanização — mostrando que estudar com excelência caminha lado a lado
@@ -316,6 +420,14 @@
     </div>
   </div>
 </section>
+
+<!-- ======================= FAIXA ROLANTE ======================= -->
+<div class="ribbon" aria-hidden="true">
+  <span class="track" id="ribbonTrack">
+    <b>Humanização</b><i>✦</i><b>Organização</b><i>♡</i><b>Conteúdo técnico</b><i>✦</i><b>Autocuidado</b><i>♡</i><b>Excelência</b><i>✦</i><b>Estudos com foco</b><i>♡</i>
+    <b>Humanização</b><i>✦</i><b>Organização</b><i>♡</i><b>Conteúdo técnico</b><i>✦</i><b>Autocuidado</b><i>♡</i><b>Excelência</b><i>✦</i><b>Estudos com foco</b><i>♡</i>
+  </span>
+</div>
 
 <!-- ======================= IDENTIDADE ======================= -->
 <div class="idbar">
@@ -348,6 +460,19 @@
         porque uma futura profissional da saúde cuida do próximo sem esquecer de cuidar de si.</p>
       <p>Uno <strong>humanização, organização e conteúdo técnico de qualidade</strong> para construir
         uma comunidade engajada, motivada pelo aprendizado contínuo e pela busca da excelência.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= NÚMEROS ======================= -->
+<section class="stats-wrap">
+  <div class="wrap">
+    <div class="flourish reveal">✦ &nbsp;a caminhada até aqui&nbsp; ✦</div>
+    <div class="stats" style="margin-top:26px">
+      <div class="stat reveal"><div class="num" data-count="5" data-suffix="+">0</div><div class="lbl">anos criando conteúdo</div></div>
+      <div class="stat reveal"><div class="num" data-count="7">0</div><div class="lbl">capacitações &amp; certificados</div></div>
+      <div class="stat reveal"><div class="num" data-count="12" data-suffix="+">0</div><div class="lbl">vivências &amp; ações na comunidade</div></div>
+      <div class="stat reveal"><div class="num">∞</div><div class="lbl">dedicação ao autocuidado</div></div>
     </div>
   </div>
 </section>
@@ -476,7 +601,12 @@
   </div>
 </footer>
 
+<!-- WhatsApp flutuante -->
+<a class="wa-float" href="https://wa.me/5581995316999" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+
 <script>
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   // scroll reveal
   const io=new IntersectionObserver((es)=>{
     es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})
@@ -484,4 +614,31 @@
   document.querySelectorAll('.reveal').forEach((el,i)=>{
     el.style.transitionDelay=(i%6*40)+'ms';io.observe(el);
   });
+
+  // barra de progresso de leitura
+  const bar=document.getElementById('progress');
+  const onScroll=()=>{
+    const h=document.documentElement;
+    const p=h.scrollTop/((h.scrollHeight-h.clientHeight)||1);
+    bar.style.width=(p*100)+'%';
+  };
+  document.addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  // contador dos números
+  const countUp=(el)=>{
+    const target=+el.dataset.count, suffix=el.dataset.suffix||'';
+    if(reduce){el.textContent=target+suffix;return;}
+    const dur=1200, t0=performance.now();
+    const step=(t)=>{
+      const k=Math.min((t-t0)/dur,1);
+      const val=Math.round(target*(1-Math.pow(1-k,3)));
+      el.textContent=val+suffix;
+      if(k<1)requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+  const io2=new IntersectionObserver((es)=>{
+    es.forEach(e=>{if(e.isIntersecting){countUp(e.target);io2.unobserve(e.target)}})
+  },{threshold:.6});
+  document.querySelectorAll('.num[data-count]').forEach(el=>io2.observe(el));
 </script>
