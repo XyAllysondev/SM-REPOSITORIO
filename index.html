@@ -278,6 +278,13 @@
   .brand .avatar{width:36px;height:36px;border-radius:50%;object-fit:cover;object-position:center 22%;
     border:2px solid var(--surface);box-shadow:0 0 0 2px var(--rose),var(--shadow-sm)}
 
+  /* botão de alternância de tema */
+  .nav-right{display:flex;align-items:center;gap:14px}
+  .theme-toggle{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--surface);
+    color:var(--ink);cursor:pointer;font-size:1rem;line-height:1;display:grid;place-items:center;
+    transition:transform .2s,border-color .2s,background .2s}
+  .theme-toggle:hover{transform:translateY(-2px) rotate(-12deg);border-color:var(--rose)}
+
   /* link do menu com sublinhado animado */
   .nav-links a{position:relative}
   .nav-links a::after{content:"";position:absolute;left:0;bottom:-5px;height:2px;width:0;border-radius:2px;
@@ -378,7 +385,10 @@
       <a href="#certificados">Capacitações</a>
       <a href="#trabalhos">Trabalhos</a>
     </nav>
-    <a class="nav-cta" href="#contato">Fale comigo</a>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema claro e escuro" title="Alternar tema claro/escuro">☀</button>
+      <a class="nav-cta" href="#contato">Fale comigo</a>
+    </div>
   </div>
 </header>
 
@@ -476,7 +486,7 @@
     <div class="flourish reveal">✦ &nbsp;a caminhada até aqui&nbsp; ✦</div>
     <div class="stats" style="margin-top:26px">
       <div class="stat reveal"><div class="num" data-count="5" data-suffix="+">0</div><div class="lbl">anos criando conteúdo</div></div>
-      <div class="stat reveal"><div class="num" data-count="5">0</div><div class="lbl">capacitações &amp; certificados</div></div>
+      <div class="stat reveal"><div class="num" data-count="7">0</div><div class="lbl">certificados de capacitação</div></div>
       <div class="stat reveal"><div class="num" data-count="12" data-suffix="+">0</div><div class="lbl">vivências &amp; ações na comunidade</div></div>
       <div class="stat reveal"><div class="num">∞</div><div class="lbl">dedicação ao autocuidado</div></div>
     </div>
@@ -539,10 +549,26 @@
         </div>
         <div class="body"><span class="tag">Minicurso</span><h4>Remissão não é Cura: a depressão como condição crônica</h4><span class="open">Abrir PDF →</span></div>
       </a>
+      <a class="card cert-card reveal" href="certificados/cert-3.pdf" target="_blank" rel="noopener">
+        <div class="media">
+          <span class="pill">PDF · 10h</span>
+          <img src="fotos/cert-3.jpg" alt="Certificado minicurso Remissão não é Cura" loading="lazy" onerror="this.style.display='none'">
+          <div class="pdfmark"><span class="doc">PDF</span><small>certificado</small></div>
+        </div>
+        <div class="body"><span class="tag">Minicurso</span><h4>Remissão não é Cura: a depressão como condição crônica</h4><span class="open">Abrir PDF →</span></div>
+      </a>
       <a class="card cert-card reveal" href="certificados/cert-4.pdf" target="_blank" rel="noopener">
         <div class="media">
           <span class="pill">PDF · 10h</span>
           <img src="fotos/cert-4.jpg" alt="Certificado minicurso Simulação Realística" loading="lazy" onerror="this.style.display='none'">
+          <div class="pdfmark"><span class="doc">PDF</span><small>certificado</small></div>
+        </div>
+        <div class="body"><span class="tag">Minicurso</span><h4>Simulação Realística no Cuidado às Doenças Crônicas</h4><span class="open">Abrir PDF →</span></div>
+      </a>
+      <a class="card cert-card reveal" href="certificados/cert-5.pdf" target="_blank" rel="noopener">
+        <div class="media">
+          <span class="pill">PDF · 10h</span>
+          <img src="fotos/cert-5.jpg" alt="Certificado minicurso Simulação Realística" loading="lazy" onerror="this.style.display='none'">
           <div class="pdfmark"><span class="doc">PDF</span><small>certificado</small></div>
         </div>
         <div class="body"><span class="tag">Minicurso</span><h4>Simulação Realística no Cuidado às Doenças Crônicas</h4><span class="open">Abrir PDF →</span></div>
@@ -589,6 +615,9 @@
       <figure class="shot"><img src="fotos/trab-10.jpg" alt="Hospital Universitário UPE" loading="lazy"><figcaption><b>Vivência</b>Hospital Universitário Oswaldo Cruz (UPE)</figcaption></figure>
       <figure class="shot"><img src="fotos/trab-11.jpg" alt="Territorialização em saúde" loading="lazy"><figcaption><b>Vivência</b>Territorialização — USF Dom Hélder Câmara</figcaption></figure>
       <figure class="shot"><img src="fotos/trab-12.jpg" alt="Ação educativa na UPA" loading="lazy"><figcaption><b>Comunidade</b>Ação educativa na UPA Nova Descoberta</figcaption></figure>
+      <figure class="shot"><img src="fotos/trab-13.jpg" alt="Visita de campo em grupo" loading="lazy"><figcaption><b>Vivência</b>Visita de campo com a turma de Enfermagem</figcaption></figure>
+      <figure class="shot"><img src="fotos/trab-14.jpg" alt="Trabalho de campo" loading="lazy"><figcaption><b>Vivência</b>Trabalho de campo no território</figcaption></figure>
+      <figure class="shot"><img src="fotos/trab-15.jpg" alt="Turma de Enfermagem" loading="lazy"><figcaption><b>Vivência</b>Bastidores da graduação em Enfermagem</figcaption></figure>
     </div>
   </div>
 </section>
@@ -624,6 +653,18 @@
 
 <script>
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // tema: claro por padrão, com alternância salva
+  (function(){
+    const root=document.documentElement, tog=document.getElementById('themeToggle');
+    let saved=null; try{saved=localStorage.getItem('sm-theme')}catch(e){}
+    const apply=(t)=>{root.setAttribute('data-theme',t);tog.textContent=(t==='dark'?'🌙':'☀');};
+    apply(saved||'light');
+    tog.addEventListener('click',()=>{
+      const next=root.getAttribute('data-theme')==='dark'?'light':'dark';
+      apply(next); try{localStorage.setItem('sm-theme',next)}catch(e){}
+    });
+  })();
 
   // scroll reveal
   const io=new IntersectionObserver((es)=>{
